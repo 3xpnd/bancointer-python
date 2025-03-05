@@ -1,5 +1,12 @@
 # constants.py
 
+from decouple import config
+from bancointer.utils.environment import Environment
+
+
+app_env_name = config("APP_ENV")
+env = Environment.get_environment_by_value(app_env_name.upper())
+
 """Arquivo para armazenar constantes utilizadas na aplicação."""
 
 # SANDBOX
@@ -10,6 +17,8 @@ URL_BASE_SANDBOX = "https://cdpj-sandbox.partners.uatinter.co"
 HOST = "cdpj.partners.bancointer.com.br"
 URL_BASE = "https://cdpj.partners.bancointer.com.br"
 
+
+host = HOST_SANDBOX if env.is_sandbox else HOST
 
 # Documentação do Certificado
 DOC_CERTIFICADO = (

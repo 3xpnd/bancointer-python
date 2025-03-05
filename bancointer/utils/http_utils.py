@@ -1,4 +1,5 @@
 # http_utils.py
+from typing import Any
 
 import certifi
 import json
@@ -23,7 +24,7 @@ class HttpUtils(object):
         self.headers = {"Content-Type": "application/json"}
         self.bearer_token = {}
         self.token_util = TokenUtils(
-            client_id, client_secret, cert, conta_corrente, host
+            client_id, client_secret, cert, conta_corrente
         )
 
     def add_header_authorization(self, value):
@@ -54,7 +55,7 @@ class HttpUtils(object):
 
     def make_request(
         self, method, path, payload: dict, custom_headers_dict=None
-    ) -> dict:
+    ) -> dict[Any, Any] | None | Any:
         """Make http method, execute the request.
 
         Args:
@@ -83,7 +84,7 @@ class HttpUtils(object):
         data_response: str = ""
         response: http.client.HTTPResponse | None = None
         try:
-            # Use connection to submit a HTTP POST request
+            # Use connection to submit the HTTP POST request
             self.connection.request(
                 method=method, url=path, headers=self.headers, body=payload
             )

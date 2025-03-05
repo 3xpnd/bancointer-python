@@ -14,7 +14,6 @@ from bancointer.utils.bancointer_validations import BancoInterValidations
 from bancointer.utils.exceptions import BancoInterException, Erro
 
 from bancointer.utils.constants import (
-    HOST_SANDBOX,
     PATH_TOKEN,
     ESCOPO_BOLETO_COBRANCA_READ,
     ESCOPO_BOLETO_COBRANCA_WRITE,
@@ -32,6 +31,7 @@ from bancointer.utils.constants import (
     ESCOPO_PIX_PIX_WRITE,
     ESCOPO_PIX_WEBHOOK_READ,
     ESCOPO_PIX_WEBHOOK_WRITE,
+    host,
 )
 
 
@@ -64,7 +64,7 @@ class TokenUtils(object):
     )
 
     def __init__(
-        self, client_id, client_secret, cert, conta_corrente=None, host=HOST_SANDBOX
+        self, client_id, client_secret, cert, conta_corrente=None
     ):
         self.client_id = client_id
         self.client_secret = client_secret
@@ -113,7 +113,7 @@ class TokenUtils(object):
             connection = http.client.HTTPSConnection(
                 self.host, port=443, context=context
             )
-            # Use connection to submit a HTTP POST request
+            # Use connection to submit the HTTP POST request
             connection.request(
                 method="POST", url=PATH_TOKEN, headers=headers, body=payload
             )
