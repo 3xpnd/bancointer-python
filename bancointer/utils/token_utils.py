@@ -5,6 +5,7 @@ import json
 import os
 import http.client
 from pathlib import Path
+from decouple import config
 
 import certifi
 import ssl
@@ -59,9 +60,7 @@ def token_file_is_exist():
 
 
 class TokenUtils(object):
-    TOKEN_FILE_PATH = (
-        os.path.dirname(os.path.realpath(__file__)) + os.sep + "token.json"
-    )
+    TOKEN_FILE_PATH = os.path.join(config("SSL_DIR_BASE"), "token.json")
 
     def __init__(
         self, client_id, client_secret, cert, conta_corrente=None

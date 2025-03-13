@@ -13,9 +13,7 @@ from bancointer.deprecated import deprecated
 
 @deprecated("Use Class HttpUtils instead")
 class Util(object):
-    _TOKEN_FILE_PATH = (
-        os.path.dirname(os.path.realpath(__file__)) + os.sep + "token.json"
-    )
+    _TOKEN_FILE_PATH = os.path.join(config("SSL_DIR_BASE"), "token.json")
     _X_CONTA_CORRENTE = config("X_INTER_CONTA_CORRENTE")
 
     def __init__(self, base_url, base_url_token, client_id, client_secret, cert):
